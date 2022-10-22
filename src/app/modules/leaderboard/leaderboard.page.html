@@ -1,0 +1,35 @@
+<ion-content>
+  <ion-row class="page-container highscore-container">
+    <ion-list class="highscore-header">
+      <ion-item class="ion-no-padding">
+        <div class="item-grid">
+          <span><strong>{{"RANK" | translate}}</strong></span>
+          <span><strong>{{"NAME" | translate}}</strong></span>
+          <span><strong>{{"SCORE" | translate}}</strong></span>
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item
+        *ngFor="let rank of partOfRankList"
+        [ngClass]="{'first-rank': rank.rank === 1, 'second-rank': rank.rank === 2, 'third-rank': rank.rank === 3, 'other-rank': rank.rank > 3}"
+        class="ion-no-padding"
+      >
+        <div class="item-grid">
+          <span class="rank-pedding">{{ rank.rank }}</span>
+          <span>{{ rank.nickname }}</span>
+          <span>{{ rank.score }}</span>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-row>
+
+  <ion-infinite-scroll (ionInfinite)="loadData($event)" threshold="100px">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading..."
+
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

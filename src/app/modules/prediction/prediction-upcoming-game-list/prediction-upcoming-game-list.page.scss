@@ -1,0 +1,32 @@
+ion-avatar {
+  --border-radius: 10px;
+}
+
+.centerElements {
+  display: flex;
+  justify-content: center;
+}
+
+.centerRows {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.finished {
+  --background: #ff1212;
+}
+
+.started {
+  color: #ff0000;
+}
+
+.pending {
+  --background: #e1b31f;
+}
+
+.predictedButton {
+  --border-radius: 10px;
+  --background: #40a240;
+}

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-title>{{"TITLE" | translate}}</ion-title>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col> {{nickname}} </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar selected-tab="/main-page/prediction-upcoming-game-list" slot="bottom">
+      <ion-tab-button tab="prediction-upcoming-game-list">
+        <ion-icon name="football"></ion-icon>
+        <ion-label>Predictions</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="leaderboard">
+        <ion-icon name="trophy"></ion-icon>
+        <ion-label>Leaderboard</ion-label>
+      </ion-tab-button>
+
+      <!-- Info -->
+      <ion-tab-button tab="information">
+        <ion-icon name="information-circle"></ion-icon>
+        <ion-label>Info</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

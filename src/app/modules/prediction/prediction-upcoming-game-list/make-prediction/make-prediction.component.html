@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="primary">
+      <ion-button (click)="onDismiss()" color="secondary">
+        <ion-icon ios="arrow-back" md="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>How will win?</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-avatar>
+      <img [src]="game.firstTeam.img"/>
+    </ion-avatar>
+    <ion-label style="text-align: center">
+      <h1>{{ game.firstTeam.teamName }} vs {{ game.secondTeam.teamName }}</h1>
+      <p>{{ game.matchDate }}</p>
+      <p>Group {{ game.groupName }}</p>
+    </ion-label>
+
+    <ion-avatar>
+      <img [src]="game.secondTeam.img"/>
+    </ion-avatar>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-input (ionChange)="onScoreValueChanged($event)" [(ngModel)]="firstTeamScore" class="scoreInput"
+                   maxlength="1" placeholder="0"
+                   type="number"></ion-input>
+      </ion-col>
+      <ion-input class="scoreInput" readonly="true">:</ion-input>
+      <ion-col>
+        <ion-input (ionChange)="onScoreValueChanged($event)" [(ngModel)]="secondTeamScore" class="scoreInput"
+                   placeholder="0"
+                   type="number">
+        </ion-input>
+
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="onPredictionMade()" [disabled]="isSaveButtonDisabled()" color="primary" expand="block">Save
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="onDismiss()" color="danger" expand="block">Cancel</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

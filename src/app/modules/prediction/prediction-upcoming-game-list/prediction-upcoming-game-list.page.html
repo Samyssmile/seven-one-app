@@ -1,0 +1,38 @@
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let game of games">
+      <ion-avatar slot="start">
+        <img [src]="game.firstTeam.img"/>
+      </ion-avatar>
+      <ion-label color="accent">
+        <div class="centerElements">
+          <div class="centerRows">
+            <h2><strong>{{game.firstTeam.teamName}} vs {{game.secondTeam.teamName}}</strong></h2>
+            <p>{{comvertISO8601ToSimpleDate(game)}}</p>
+            <ion-item *ngIf="!game.matchFinished && !game.matchStarted">
+              <ion-badge class="pending">{{"PENDING" | translate}}</ion-badge>
+            </ion-item>
+            <ion-item *ngIf="!game.matchFinished && game.matchStarted">
+              <ion-badge class="running">{{"RIGHT_NOW" | translate}}</ion-badge>
+            </ion-item>
+            <ion-item *ngIf="game.matchFinished">
+              <ion-badge class="finished"> {{"FINISHED" | translate}} {{game.result}} </ion-badge>
+            </ion-item>
+            <div *ngIf="!game.matchFinished && !game.matchStarted">
+              <ion-button (click)="makePredictionClicked($event,game)" *ngIf="!game.predicted" color="secondary"
+              >{{"MAKE_YOUR_BET" | translate}}
+              </ion-button>
+            </div>
+            <ion-button *ngIf="game.predicted" class="predictedButton"
+            >{{game.preidctionFirstTeamGoals}} : {{game.preidctionSecondTeamGoals}}
+            </ion-button>
+          </div>
+        </div>
+      </ion-label>
+
+      <ion-avatar>
+        <img [src]="game.secondTeam.img"/>
+      </ion-avatar>
+    </ion-item>
+  </ion-list>
+</ion-content>

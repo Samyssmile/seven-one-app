@@ -1,0 +1,54 @@
+.highscore-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}
+
+.highscore-header {
+  padding: 0;
+}
+
+ion-searchbar {
+  max-width: 800px;
+  width: 100%;
+}
+
+ion-list {
+  max-width: 800px;
+  width: 100%;
+}
+
+.item-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 64px 1fr 64px;
+}
+
+ion-item {
+  margin: 4px 0;
+}
+
+.rank-pedding {
+  padding-left: 8px;
+}
+
+.first-rank {
+  border-left: 4px solid #ffd700;
+}
+
+.second-rank {
+  border-left: 4px solid #c0c0c0;
+}
+
+.third-rank {
+  border-left: 4px solid #cd7f32;
+}
+
+.other-rank {
+  border-left: 4px solid transparent;
+}
+
+span {
+  font-size: small;
+}

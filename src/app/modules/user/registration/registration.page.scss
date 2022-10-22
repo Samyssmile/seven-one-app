@@ -1,0 +1,12 @@
+// Vertically Center Ionic Grid
+// ------------------------------------
+ion-col {
+  text-align: center;
+}
+
+ion-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80%;
+}

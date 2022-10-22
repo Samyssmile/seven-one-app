@@ -1,0 +1,20 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h1>{{"WELCOME" | translate}}</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <form (ngSubmit)="onSubmit()" [formGroup]="registrationForm">
+          <ion-item>
+            <ion-label position="floating">Your Nickname</ion-label>
+            <ion-input formControlName="nickname" minlength="3" required="true" type="text"></ion-input>
+          </ion-item>
+          <ion-button [disabled]="!registrationForm.valid" expand="block" type="submit">Join</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
