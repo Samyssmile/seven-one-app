@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Install Stage') {
           when {
-            branch "master"
+            branch "main"
           }
           tools {nodejs "nodejs"}
           steps {
@@ -16,7 +16,7 @@ pipeline {
 
         stage('Lint Stage') {
           when {
-            branch "master"
+            branch "main"
           }
             tools {nodejs "nodejs"}
           steps {
@@ -26,7 +26,7 @@ pipeline {
 
         stage('Test Stage') {
           when {
-            branch "master"
+            branch "main"
           }
             tools {nodejs "nodejs"}
           steps {
@@ -36,7 +36,7 @@ pipeline {
 
         stage('Build Staging Stage') {
           when {
-            branch "master"
+            branch "main"
           }
           tools {nodejs "nodejs"}
            steps {
@@ -46,7 +46,7 @@ pipeline {
 
         stage('Building Docker Image') {
           when {
-            branch "master"
+            branch "main"
           }
             steps {
                 echo 'start build staging image and publish it...'
