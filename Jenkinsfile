@@ -24,23 +24,32 @@ pipeline {
           }
         }
 
-        stage('Build Production Stage') {
+        stage('Test Stage') {
+          when {
+            branch "master"
+          }
+            tools {nodejs "nodejs"}
+          steps {
+            sh 'npm run test'
+          }
+        }
+
+        stage('Build Staging Stage') {
           when {
             branch "master"
           }
           tools {nodejs "nodejs"}
            steps {
-            sh 'npm run build-prod'
+            sh 'npm run build-staging'
            }
         }
-
 
         stage('Building Docker Image') {
           when {
             branch "master"
           }
             steps {
-                echo 'start build image and publish it...'
+                echo 'start build staging image and publish it...'
                 withCredentials([usernamePassword(credentialsId: 'AkogareDockerRegistry', passwordVariable: 'password', usernameVariable: 'username')]) {
                     sh "docker login https://registry.akogare.de -u $username -p $password"
                     sh 'docker build -t registry.akogare.de/seven-one:1.0.0-RELEASE -t registry.akogare.de/seven-one:latest .'

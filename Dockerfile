@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package.json /app
 RUN npm install
 COPY . /app
-RUN npm run-script build
+RUN npm run-script build-staging
 FROM nginx:latest
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build-step /app/www/ /usr/share/nginx/html
