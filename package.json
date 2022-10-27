@@ -10,6 +10,7 @@
     "build-prod": "ng build --configuration=production --progress --verbose",
     "build-staging": "ng build --configuration=staging --progress --verbose",
     "test": "ng test",
+    "test-headless": "ng test --browsers ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

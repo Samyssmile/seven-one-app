@@ -30,7 +30,7 @@ pipeline {
           }
             tools {nodejs "nodejs"}
           steps {
-            sh 'npm run test'
+            sh 'npm run test-headless'
           }
         }
 
