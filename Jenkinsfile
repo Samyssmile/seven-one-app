@@ -24,7 +24,7 @@ pipeline {
           }
         }
 
-        stage('Test Stage') {
+/*         stage('Test Stage') {
           when {
             branch "main"
           }
@@ -32,7 +32,7 @@ pipeline {
           steps {
             sh 'npm run test-headless'
           }
-        }
+        } */
 
         stage('Build Staging Stage') {
           when {
