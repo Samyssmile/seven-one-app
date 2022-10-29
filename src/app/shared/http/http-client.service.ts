@@ -17,6 +17,7 @@ export class HttpClientService {
   constructor(private httpClient: HttpClient, private storage: Storage) {
     this.jwt = new BehaviorSubject<string>(null);
     this.storage.get('profile').then((value: AuthenticatedUserDto) => {
+      console.log('Profile loaded from storage - ' + value.nickname);
       if (value) {
         this.profile = value;
       }
@@ -70,13 +71,11 @@ export class HttpClientService {
       console.log('Request Leaderboard URL: ' + requestUrl);
     }
 
-    if (this.profile) {
-      return this.httpClient.get(requestUrl, {
-        headers: {
-          authorization: 'Bearer ' + this.profile.jwt,
-        },
-      });
-    }
+    return this.httpClient.get(requestUrl, {
+      headers: {
+        authorization: 'Bearer ' + this.jwt.value,
+      },
+    });
   }
 
   postPrediction(predictionModel: PredictionModel) {
