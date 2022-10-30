@@ -1,6 +1,6 @@
 import { Team } from './team.model';
 
-export interface Game {
+export interface Match {
   uuid: string;
   firstTeam: Team;
   secondTeam: Team;

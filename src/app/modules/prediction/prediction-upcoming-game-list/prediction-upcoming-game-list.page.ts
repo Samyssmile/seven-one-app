@@ -1,5 +1,5 @@
 import { Component, isDevMode, OnInit } from '@angular/core';
-import { Game } from '../models/game.model';
+import { Match } from '../models/game.model';
 import { PredictionUpcomingGameListService } from './prediction-upcoming-game-list.service';
 import { ModalController } from '@ionic/angular';
 import { MakePredictionComponent } from './make-prediction/make-prediction.component';
@@ -13,8 +13,8 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './prediction-upcoming-game-list.page.html',
   styleUrls: ['./prediction-upcoming-game-list.page.scss'],
 })
-export class PredictionUpcomingGameListPage implements OnInit, Observer<Game[]> {
-  games: Game[] = [];
+export class PredictionUpcomingGameListPage implements OnInit, Observer<Match[]> {
+  games: Match[] = [];
   language: string;
 
   constructor(
@@ -34,7 +34,7 @@ export class PredictionUpcomingGameListPage implements OnInit, Observer<Game[]> 
     this.games = this.predictionUpcomingGameListService.sortGamesByPredictionAndStartedStatus(this.games);
   }
 
-  makePredictionClicked(event: Event, game: Game) {
+  makePredictionClicked(event: Event, game: Match) {
     // stop propagation to avoid opening the game details
     event.preventDefault();
     event.stopPropagation();
@@ -61,14 +61,14 @@ export class PredictionUpcomingGameListPage implements OnInit, Observer<Game[]> 
     console.log('error', err);
   }
 
-  next(value: Game[]): void {
+  next(value: Match[]): void {
     if (isDevMode()) {
       console.log('next games values', value);
     }
     this.games.push(...value);
   }
 
-  comvertISO8601ToSimpleDate(game: Game) {
+  comvertISO8601ToSimpleDate(game: Match) {
     const isoString = game.matchDate;
     const dateFormat = 'DD/MM/YYY HH:mm:ss';
     return new Date(isoString).toLocaleString('de-DE', { timeZone: 'UTC' });

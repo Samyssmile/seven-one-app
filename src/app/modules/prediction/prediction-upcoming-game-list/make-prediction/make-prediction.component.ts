@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Game } from '../../models/game.model';
+import { Match } from '../../models/game.model';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AuthenticatedUserDto } from '../../../../shared/dtos/AuthenticatedUserDto';
@@ -11,7 +11,7 @@ import { PredictionService } from '../../prediction.service';
   styleUrls: ['./make-prediction.component.scss', '../../../../app.component.scss'],
 })
 export class MakePredictionComponent implements OnInit {
-  @Input() game: Game;
+  @Input() game: Match;
   firstTeamScore: number;
   secondTeamScore: number;
 
@@ -31,7 +31,7 @@ export class MakePredictionComponent implements OnInit {
     this.storage.get('profile').then((profile: AuthenticatedUserDto) => {
       const clientsUuid = profile.clientUuid;
       this.predictionService.makePrediction({
-        gameUuid: this.game.uuid,
+        matchUuid: this.game.uuid,
         clientUuid: clientsUuid,
         prediction: this.firstTeamScore + ':' + this.secondTeamScore,
       });

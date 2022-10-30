@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Game } from '../models/game.model';
+import { Match } from '../models/game.model';
 import { Storage } from '@ionic/storage-angular';
 import { AuthenticatedUserDto } from '../../../shared/dtos/AuthenticatedUserDto';
 import { HttpClientService } from '../../../shared/http/http-client.service';
@@ -11,13 +11,13 @@ import { PredictionModel } from '../models/prediction.model';
 })
 export class PredictionUpcomingGameListService {
   // Real Match data of Fifa World Cup 2022. Group A.
-  private games: BehaviorSubject<Game[]> = new BehaviorSubject<Game[]>([]);
+  private games: BehaviorSubject<Match[]> = new BehaviorSubject<Match[]>([]);
 
   constructor(private storage: Storage, private httpClientService: HttpClientService) {}
 
   getGames() {
     this.storage.get('profile').then((profile: AuthenticatedUserDto) => {
-      this.httpClientService.getAllGames(profile.jwt).subscribe((games: Game[]) => {
+      this.httpClientService.getAllGames(profile.jwt).subscribe((games: Match[]) => {
         this.getAllPredictionsByClientsUuid(games, profile.clientUuid, profile.jwt);
       });
     });
@@ -31,15 +31,15 @@ export class PredictionUpcomingGameListService {
     this.games.subscribe(observer);
   }
 
-  getAllPredictionsByClientsUuid(games: Game[], clientUuid: string, jwt: string) {
+  getAllPredictionsByClientsUuid(games: Match[], clientUuid: string, jwt: string) {
     return this.httpClientService.getPredictions(clientUuid, jwt).subscribe((predictions: PredictionModel[]) => {
       this.updateGamesByPrediction(games, predictions);
     });
   }
 
-  updateGamesByPrediction(games: Game[], predictions: PredictionModel[]) {
+  updateGamesByPrediction(games: Match[], predictions: PredictionModel[]) {
     games.forEach((game) => {
-      const prediction = predictions.find((p) => p.gameUuid === game.uuid);
+      const prediction = predictions.find((p) => p.matchUuid === game.uuid);
       if (prediction) {
         const predictionSplit = prediction.prediction.split(':');
         game.preidctionFirstTeamGoals = Number(predictionSplit[0]);
@@ -77,7 +77,7 @@ export class PredictionUpcomingGameListService {
     this.games.next(this.sortGamesByPredictionAndStartedStatus(games));
   }
 
-  sortGamesByPredictionAndStartedStatus(gameList: Game[]): Game[] {
+  sortGamesByPredictionAndStartedStatus(gameList: Match[]): Match[] {
     return gameList.sort((a, b) => {
       if (a.predicted && !b.predicted) {
         return 1;

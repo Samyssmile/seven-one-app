@@ -1,5 +1,5 @@
 export interface PredictionModel {
   clientUuid: string;
-  gameUuid: string;
+  matchUuid: string;
   prediction: string;
 }

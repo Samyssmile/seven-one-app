@@ -16,11 +16,12 @@ export class HttpClientService {
 
   constructor(private httpClient: HttpClient, private storage: Storage) {
     this.jwt = new BehaviorSubject<string>(null);
-    this.storage.get('profile').then((value: AuthenticatedUserDto) => {
-      console.log('Profile loaded from storage - ' + value.nickname);
-      if (value) {
-        this.profile = value;
-      }
+    storage.create().then((localStorage) => {
+      localStorage.get('profile').then((value) => {
+        if (value != null) {
+          this.jwt.next(value.jwt);
+        }
+      });
     });
   }
 
