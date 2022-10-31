@@ -4,8 +4,8 @@ export const environment = {
   createUserUrl: '/user/account/create',
   leaderboardUrl: '/ranking/all',
   predictionUrl: '/predictions',
-  gameUrl: '/matches',
+  matchUrl: '/matches',
   loginUrl: '/user/account/login',
-  gamesAllUrl: '/matches/all',
-  unpredictedGamesUrl: '/games/unpredicted',
+  allMatchesUrl: '/matches/all',
+  unpredictedMatchesUrl: '/matches/unpredicted',
 };

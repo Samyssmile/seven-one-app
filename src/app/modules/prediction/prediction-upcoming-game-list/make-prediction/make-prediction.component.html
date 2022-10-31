@@ -11,16 +11,16 @@
 <ion-content>
   <ion-item>
     <ion-avatar>
-      <img [src]="game.firstTeam.img"/>
+      <img [src]="match.firstTeam.img"/>
     </ion-avatar>
     <ion-label style="text-align: center">
-      <h1>{{ game.firstTeam.teamName }} vs {{ game.secondTeam.teamName }}</h1>
-      <p>{{ game.matchDate }}</p>
-      <p>Group {{ game.groupName }}</p>
+      <h1>{{ match.firstTeam.teamName }} vs {{ match.secondTeam.teamName }}</h1>
+      <p>{{ match.matchDate }}</p>
+      <p>Group {{ match.groupName }}</p>
     </ion-label>
 
     <ion-avatar>
-      <img [src]="game.secondTeam.img"/>
+      <img [src]="match.secondTeam.img"/>
     </ion-avatar>
   </ion-item>
 

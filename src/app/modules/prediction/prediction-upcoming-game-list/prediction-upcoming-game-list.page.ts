@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./prediction-upcoming-game-list.page.scss'],
 })
 export class PredictionUpcomingGameListPage implements OnInit, Observer<Match[]> {
-  games: Match[] = [];
+  matches: Match[] = [];
   language: string;
 
   constructor(
@@ -31,26 +31,27 @@ export class PredictionUpcomingGameListPage implements OnInit, Observer<Match[]>
 
   ngOnInit() {
     this.predictionUpcomingGameListService.getGames();
-    this.games = this.predictionUpcomingGameListService.sortGamesByPredictionAndStartedStatus(this.games);
+    this.matches = this.predictionUpcomingGameListService.sortGamesByPredictionAndStartedStatus(this.matches);
   }
 
-  makePredictionClicked(event: Event, game: Match) {
+  makePredictionClicked(event: Event, match: Match) {
     // stop propagation to avoid opening the game details
     event.preventDefault();
     event.stopPropagation();
+    console.log(match);
     this.modalController
       .create({
         component: MakePredictionComponent,
-        componentProps: { game },
+        componentProps: { match },
         id: 'make-prediction-modal',
       })
       .then((modal) => {
         modal.present();
         modal.onDidDismiss().then((result) => {
           if (isDevMode()) {
-            console.log('modal dismissed', result.data.gameUuid + ' - ' + result.data.clientUuid);
-            this.predictionUpcomingGameListService.sortGamesByPredictionAndStartedStatus(this.games);
+            console.log('modal dismissed', result.data.matchUuid + ' - ' + result.data.clientUuid);
           }
+          this.predictionUpcomingGameListService.sortGamesByPredictionAndStartedStatus(this.matches);
         });
       });
   }
@@ -65,16 +66,16 @@ export class PredictionUpcomingGameListPage implements OnInit, Observer<Match[]>
     if (isDevMode()) {
       console.log('next games values', value);
     }
-    this.games.push(...value);
+    this.matches.push(...value);
   }
 
-  comvertISO8601ToSimpleDate(game: Match) {
-    const isoString = game.matchDate;
+  comvertISO8601ToSimpleDate(match: Match) {
+    const isoString = match.matchDate;
     const dateFormat = 'DD/MM/YYY HH:mm:ss';
     return new Date(isoString).toLocaleString('de-DE', { timeZone: 'UTC' });
   }
 
-  removeGameFromListByGameUuid(gameUuid) {
-    this.games = this.games.filter((game) => game.uuid !== gameUuid);
+  removeGameFromListByMatchUuid(matchUuid) {
+    this.matches = this.matches.filter((match) => match.uuid !== matchUuid);
   }
 }

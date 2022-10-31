@@ -17,14 +17,14 @@ export class PredictionUpcomingGameListService {
 
   getGames() {
     this.storage.get('profile').then((profile: AuthenticatedUserDto) => {
-      this.httpClientService.getAllGames(profile.jwt).subscribe((games: Match[]) => {
-        this.getAllPredictionsByClientsUuid(games, profile.clientUuid, profile.jwt);
+      this.httpClientService.getAllGames(profile.jwt).subscribe((matches: Match[]) => {
+        this.getAllPredictionsByClientsUuid(matches, profile.clientUuid, profile.jwt);
       });
     });
   }
 
-  getGame(gameUuid: string) {
-    return this.games.value.find((game) => game.uuid === gameUuid);
+  getMatch(matchUuid: string) {
+    return this.games.value.find((match) => match.uuid === matchUuid);
   }
 
   registerGamesObserver(observer) {
@@ -38,47 +38,47 @@ export class PredictionUpcomingGameListService {
   }
 
   updateGamesByPrediction(games: Match[], predictions: PredictionModel[]) {
-    games.forEach((game) => {
-      const prediction = predictions.find((p) => p.matchUuid === game.uuid);
+    games.forEach((match) => {
+      const prediction = predictions.find((p) => p.matchUuid === match.uuid);
       if (prediction) {
         const predictionSplit = prediction.prediction.split(':');
-        game.preidctionFirstTeamGoals = Number(predictionSplit[0]);
-        game.preidctionSecondTeamGoals = Number(predictionSplit[1]);
-        game.predicted = true;
-        game.allowPredictions = true;
-        game.matchStarted = false;
-        game.matchStarted = false;
-        game.matchFinished = false;
+        match.preidctionFirstTeamGoals = Number(predictionSplit[0]);
+        match.preidctionSecondTeamGoals = Number(predictionSplit[1]);
+        match.predicted = true;
+        match.allowPredictions = true;
+        match.matchStarted = false;
+        match.matchStarted = false;
+        match.matchFinished = false;
       } else {
-        game.allowPredictions = true;
-        game.matchStarted = false;
-        game.matchStarted = false;
-        game.matchFinished = false;
+        match.allowPredictions = true;
+        match.matchStarted = false;
+        match.matchStarted = false;
+        match.matchFinished = false;
       }
       // if game match date is more than 140 minutes in the past.
       // Game is finished.
-      if (new Date(game.matchDate).getTime() < new Date().getTime() - 150 * 60 * 1000) {
-        if (new Date(game.matchDate) < new Date()) {
-          game.matchFinished = true;
-          game.allowPredictions = false;
-          game.matchStarted = true;
+      if (new Date(match.matchDate).getTime() < new Date().getTime() - 150 * 60 * 1000) {
+        if (new Date(match.matchDate) < new Date()) {
+          match.matchFinished = true;
+          match.allowPredictions = false;
+          match.matchStarted = true;
         }
       }
       // Game running right now.
       if (
-        new Date(game.matchDate).getTime() < new Date().getTime() &&
-        new Date(game.matchDate).getTime() > new Date().getTime() - 150 * 60 * 1000
+        new Date(match.matchDate).getTime() < new Date().getTime() &&
+        new Date(match.matchDate).getTime() > new Date().getTime() - 150 * 60 * 1000
       ) {
-        game.matchStarted = true;
-        game.matchFinished = false;
-        game.allowPredictions = false;
+        match.matchStarted = true;
+        match.matchFinished = false;
+        match.allowPredictions = false;
       }
     });
     this.games.next(this.sortGamesByPredictionAndStartedStatus(games));
   }
 
-  sortGamesByPredictionAndStartedStatus(gameList: Match[]): Match[] {
-    return gameList.sort((a, b) => {
+  sortGamesByPredictionAndStartedStatus(matchList: Match[]): Match[] {
+    return matchList.sort((a, b) => {
       if (a.predicted && !b.predicted) {
         return 1;
       }

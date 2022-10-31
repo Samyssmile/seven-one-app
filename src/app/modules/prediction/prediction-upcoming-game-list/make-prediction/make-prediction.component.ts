@@ -11,7 +11,7 @@ import { PredictionService } from '../../prediction.service';
   styleUrls: ['./make-prediction.component.scss', '../../../../app.component.scss'],
 })
 export class MakePredictionComponent implements OnInit {
-  @Input() game: Match;
+  @Input() match: Match;
   firstTeamScore: number;
   secondTeamScore: number;
 
@@ -29,21 +29,20 @@ export class MakePredictionComponent implements OnInit {
 
   onPredictionMade() {
     this.storage.get('profile').then((profile: AuthenticatedUserDto) => {
-      const clientsUuid = profile.clientUuid;
       this.predictionService.makePrediction({
-        matchUuid: this.game.uuid,
-        clientUuid: clientsUuid,
+        matchUuid: this.match.uuid,
+        clientUuid: profile.clientUuid,
         prediction: this.firstTeamScore + ':' + this.secondTeamScore,
       });
-      this.game.preidctionFirstTeamGoals = this.firstTeamScore;
-      this.game.preidctionSecondTeamGoals = this.secondTeamScore;
-      this.game.predicted = true;
+      this.match.preidctionFirstTeamGoals = this.firstTeamScore;
+      this.match.preidctionSecondTeamGoals = this.secondTeamScore;
+      this.match.predicted = true;
 
       this.modalController.dismiss(
         {
           message: 'Prediction Made!',
-          gameUuid: this.game.uuid,
-          clientUuid: clientsUuid,
+          matchUuid: this.match.uuid,
+          clientUuid: profile.clientUuid,
         },
         'prediction-made',
         'make-prediction-modal'

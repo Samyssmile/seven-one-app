@@ -81,31 +81,29 @@ export class HttpClientService {
 
   postPrediction(predictionModel: PredictionModel) {
     this.storage.get('profile').then((value) => {
+      // Make Request with Authorization Header
+      const requestUrl = environment.baserUrl + environment.predictionUrl;
       if (isDevMode()) {
-        // Make Request with Authorization Header
-        const requestUrl = environment.baserUrl + environment.predictionUrl;
-        if (isDevMode()) {
-          console.log('Request Prediction URL: ' + requestUrl);
-        }
-        this.httpClient
-          .post(requestUrl, predictionModel, {
-            headers: {
-              authorization: 'Bearer ' + value.jwt,
-            },
-          })
-          .subscribe(
-            (resonsedata) => {
-              if (isDevMode()) {
-                console.log('Prediction posted: ' + resonsedata);
-              }
-            },
-            (error) => {
-              if (isDevMode()) {
-                console.log('Error while posting prediction: ' + error);
-              }
-            }
-          );
+        console.log('Request Prediction URL: ' + requestUrl);
       }
+      this.httpClient
+        .post(requestUrl, predictionModel, {
+          headers: {
+            authorization: 'Bearer ' + value.jwt,
+          },
+        })
+        .subscribe(
+          (resonsedata) => {
+            if (isDevMode()) {
+              console.log('Prediction posted: ' + resonsedata);
+            }
+          },
+          (error) => {
+            if (isDevMode()) {
+              console.log('Error while posting prediction: ' + error);
+            }
+          }
+        );
     });
   }
 
@@ -123,7 +121,7 @@ export class HttpClientService {
 
   getUnpredictedGames(clientUuid: string) {
     console.log('Requesting Games');
-    const requestUrl = environment.baserUrl + environment.unpredictedGamesUrl + '?clientUuid=' + clientUuid;
+    const requestUrl = environment.baserUrl + environment.unpredictedMatchesUrl + '?clientUuid=' + clientUuid;
 
     return this.httpClient.get(requestUrl, {
       headers: {
@@ -134,7 +132,7 @@ export class HttpClientService {
 
   getAllGames(jwt: string) {
     console.log('Requesting Games');
-    const requestUrl = environment.baserUrl + environment.gamesAllUrl;
+    const requestUrl = environment.baserUrl + environment.allMatchesUrl;
 
     return this.httpClient.get(requestUrl, {
       headers: {
