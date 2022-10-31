@@ -23,5 +23,7 @@
   "RANK": "Ранг",
   "NAME": "Имя",
   "SCORE": "Очки"
-  "LOADING_MORE_DATA": "Загрузка данных..."
+  "LOADING_MORE_DATA": "Загрузка данных...",
+  "YOUR_ACCOUNT": "Ваш аккаунт",
+  "DELETE_ACCOUNT": "Удалить аккаунт",
 }

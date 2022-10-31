@@ -31,4 +31,15 @@
       <p>feedback@nexent.de</p>
     </ion-card-content>
   </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <img src="assets/images/danger-zone.png"/>
+      <ion-card-title>{{"YOUR_ACCOUNT" | translate}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-button class="danger-button" color="danger" (click)="deleteAccount()">{{"DELETE_ACCOUNT" | translate}}</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

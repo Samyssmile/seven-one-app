@@ -23,5 +23,7 @@
   "RANK": "Rango",
   "NAME": "Nombre",
   "SCORE": "Puntuación",
-  "LOADING_MORE_DATA": "Cargando más datos..."
+  "LOADING_MORE_DATA": "Cargando más datos...",
+  "YOUR_ACCOUNT": "Tu cuenta",
+  "DELETE_ACCOUNT": "Eliminar cuenta",
 }

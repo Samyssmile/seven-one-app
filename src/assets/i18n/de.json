@@ -23,5 +23,7 @@
   "RANK": "Rang",
   "NAME": "Name",
   "SCORE": "Punkte",
-  "LOADING_MORE_DATA": "Daten werden geladen..."
+  "LOADING_MORE_DATA": "Daten werden geladen...",
+  "YOUR_ACCOUNT": "Dein Account",
+  "DELETE_ACCOUNT": "Account löschen"
 }

@@ -16,4 +16,8 @@ export class InformationPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  deleteAccount() {
+    console.log('Delete Account');
+  }
 }

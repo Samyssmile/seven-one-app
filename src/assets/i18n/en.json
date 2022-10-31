@@ -23,5 +23,7 @@
   "RANK": "Rank",
   "NAME": "Name",
   "SCORE": "Score",
-  "LOADING_MORE_DATA": "Loading more data..."
+  "LOADING_MORE_DATA": "Loading more data...",
+  "YOUR_ACCOUNT": "Your Account",
+  "DELETE_ACCOUNT": "Delete Account",
 }
