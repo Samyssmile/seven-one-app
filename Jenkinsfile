@@ -34,13 +34,13 @@ pipeline {
           }
         } */
 
-        stage('Build Staging Stage') {
+        stage('Build Production Stage') {
           when {
             branch "main"
           }
           tools {nodejs "nodejs"}
            steps {
-            sh 'npm run build-staging'
+            sh 'npm run build-prod'
            }
         }
 
@@ -59,7 +59,7 @@ pipeline {
             }
         }
     }
-/*     post {
+/*      post {
         always {
             echo 'Make Portainer Webhook'
             sh 'curl -X POST https://portainer.akogare.de/api/webhooks/c83d20c3-dd14-41af-b4ad-330b64191e2f'
