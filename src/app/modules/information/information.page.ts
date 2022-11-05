@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateConfigService } from '../../shared/translate/translate-config.service';
 import { TranslateService } from '@ngx-translate/core';
-import {Storage} from "@ionic/storage-angular";
-import {Router} from "@angular/router";
+import {Storage} from '@ionic/storage-angular';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-information',
@@ -24,8 +24,8 @@ export class InformationPage implements OnInit {
 
   deleteAccount(modal) {
     this.storage.clear();
-    this.router.navigateByUrl('/registration');
     modal.dismiss();
+    this.router.navigateByUrl('/registration');
   }
 
 }
