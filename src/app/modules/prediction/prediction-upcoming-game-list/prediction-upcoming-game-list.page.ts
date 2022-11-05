@@ -31,7 +31,7 @@ export class PredictionUpcomingGameListPage implements OnInit, Observer<Match[]>
 
   ngOnInit() {
     this.predictionUpcomingGameListService.getGames();
-    this.matches = this.predictionUpcomingGameListService.sortGamesByPredictionAndStartedStatus(this.matches);
+    this.matches = this.predictionUpcomingGameListService.sortGamesByPredictionAndMatchDate(this.matches);
   }
 
   makePredictionClicked(event: Event, match: Match) {
@@ -51,7 +51,7 @@ export class PredictionUpcomingGameListPage implements OnInit, Observer<Match[]>
           if (isDevMode()) {
             console.log('modal dismissed', result.data.matchUuid + ' - ' + result.data.clientUuid);
           }
-          this.predictionUpcomingGameListService.sortGamesByPredictionAndStartedStatus(this.matches);
+          this.predictionUpcomingGameListService.sortGamesByPredictionAndMatchDate(this.matches);
         });
       });
   }

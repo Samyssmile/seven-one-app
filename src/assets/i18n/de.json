@@ -25,5 +25,8 @@
   "SCORE": "Punkte",
   "LOADING_MORE_DATA": "Daten werden geladen...",
   "YOUR_ACCOUNT": "Dein Account",
-  "DELETE_ACCOUNT": "Account löschen"
+  "DELETE_ACCOUNT": "Account löschen",
+  "HOW_GAME_WILL_END": "Wie wird das Spiel enden?",
+  "ARE_YOU_SURE": "Bist du dir sicher?",
+  "THIS_CAN_NOT_BE_UNDONE": "Dies kann nicht rückgängig gemacht werden.",
 }

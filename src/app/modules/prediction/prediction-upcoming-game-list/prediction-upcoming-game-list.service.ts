@@ -74,30 +74,19 @@ export class PredictionUpcomingGameListService {
         match.allowPredictions = false;
       }
     });
-    this.games.next(this.sortGamesByPredictionAndStartedStatus(games));
+    this.games.next(this.sortGamesByPredictionAndMatchDate(games));
   }
 
-  sortGamesByPredictionAndStartedStatus(matchList: Match[]): Match[] {
+  sortGamesByPredictionAndMatchDate(matchList: Match[]): Match[] {
     return matchList.sort((a, b) => {
-      if (a.predicted && !b.predicted) {
+      if (a.predicted === b.predicted) {
+        return new Date(a.matchDate).getTime() - new Date(b.matchDate).getTime();
+      }
+      if (a.predicted) {
         return 1;
       }
-      if (!a.predicted && b.predicted) {
-        return -1;
-      }
-      if (a.matchStarted && !b.matchStarted) {
-        return 1;
-      }
-      if (!a.matchStarted && b.matchStarted) {
-        return -1;
-      }
-      if (a.matchFinished && !b.matchFinished) {
-        return 1;
-      }
-      if (!a.matchFinished && b.matchFinished) {
-        return -1;
-      }
-      return 0;
+      return -1;
     });
+
   }
 }
