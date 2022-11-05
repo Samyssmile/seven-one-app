@@ -5,6 +5,7 @@ import { AuthenticatedUserDto } from '../../shared/dtos/AuthenticatedUserDto';
 import { Storage } from '@ionic/storage-angular';
 import { TranslateConfigService } from '../../shared/translate/translate-config.service';
 import { TranslateService } from '@ngx-translate/core';
+import {LeaderboardService} from "../leaderboard/leaderboard.service";
 
 @Component({
   selector: 'app-main-page',
@@ -13,9 +14,13 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class MainPagePage implements OnInit, Observer<any> {
   nickname = 'No nickname yet';
+  score = 0;
+  rank = 0;
   language: string;
+  private clientUuid;
 
   constructor(
+    private leaderBoardService: LeaderboardService,
     private httpClientService: HttpClientService,
     private storage: Storage,
     private translateConfigService: TranslateConfigService,
@@ -23,11 +28,16 @@ export class MainPagePage implements OnInit, Observer<any> {
   ) {
     this.translateConfigService.getDefaultLanguage();
     this.language = this.translateConfigService.getCurrentLang();
+  }
 
+  ngOnInit() {
     this.storage.get('profile').then(
       (profile) => {
         if (profile && profile.nickname) {
           this.nickname = profile.nickname;
+          this.score = profile.score;
+          this.rank = profile.rank;
+          this.clientUuid= profile.clientUuid;
         }
       },
       (error) => {
@@ -35,8 +45,6 @@ export class MainPagePage implements OnInit, Observer<any> {
       }
     );
   }
-
-  ngOnInit() {}
 
   complete(): void {
     console.log('Profile Observer completed');
@@ -61,5 +69,35 @@ export class MainPagePage implements OnInit, Observer<any> {
         }
       );
     }
+  }
+
+  onPredictionsClicked() {
+    this.updateProfile();
+  }
+
+  onLeaderboardClicked() {
+    this.updateProfile();
+  }
+
+  onInfoClicked() {
+    this.updateProfile();
+  }
+
+  private updateProfile() {
+    this.leaderBoardService.getLeaderboard();
+    this.httpClientService.login(this.clientUuid);
+    this.storage.get('profile').then(
+      (profile) => {
+        if (profile && profile.nickname) {
+          this.nickname = profile.nickname;
+          this.score = profile.score;
+          this.rank = profile.rank;
+          this.clientUuid= profile.clientUuid;
+        }
+      },
+      (error) => {
+        console.log('Error while getting profile from storage: ' + error);
+      }
+    );
   }
 }

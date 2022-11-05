@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
 import { Rank } from './rank.model';
 import { LeaderboardService } from './leaderboard.service';
 import { Observer } from 'rxjs';
@@ -9,7 +9,7 @@ import { ToastController } from '@ionic/angular';
   templateUrl: './leaderboard.page.html',
   styleUrls: ['./leaderboard.page.scss'],
 })
-export class LeaderboardPage implements OnInit, Observer<Rank[]> {
+export class LeaderboardPage implements OnInit, AfterViewChecked, Observer<Rank[]> {
   ranklist: Rank[] = [];
   partOfRankList: Rank[] = [];
   listSizeLimit = 25;
@@ -19,7 +19,11 @@ export class LeaderboardPage implements OnInit, Observer<Rank[]> {
     leaderBoardService.getLeaderboard();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
+
+  ngAfterViewChecked() {
+  }
 
   complete(): void {}
 

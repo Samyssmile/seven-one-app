@@ -4,3 +4,11 @@ ion-col {
   justify-content: center;
   align-items: center;
 }
+
+.userInfoRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
