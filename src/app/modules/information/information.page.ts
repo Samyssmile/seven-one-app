@@ -3,6 +3,7 @@ import { TranslateConfigService } from '../../shared/translate/translate-config.
 import { TranslateService } from '@ngx-translate/core';
 import {Storage} from '@ionic/storage-angular';
 import {Router} from '@angular/router';
+import {HttpClientService} from '../../shared/http/http-client.service';
 
 @Component({
   selector: 'app-information',
@@ -13,6 +14,7 @@ export class InformationPage implements OnInit {
   language: string;
 
   constructor(private router: Router,
+    private httpClientService: HttpClientService,
     private storage: Storage,
     private translateConfigService: TranslateConfigService,
     private translate: TranslateService) {
@@ -23,6 +25,7 @@ export class InformationPage implements OnInit {
   ngOnInit() {}
 
   deleteAccount(modal) {
+    this.httpClientService.clear();
     this.storage.clear();
     modal.dismiss();
     this.router.navigateByUrl('/registration');

@@ -48,9 +48,8 @@
       <div class="modalDialog">
         <h1>{{"ARE_YOU_SURE" | translate}}</h1>
         <p>{{"THIS_CAN_NOT_BE_UNDONE" | translate}}</p>
-        <!-- Button Yes, Button No-->
-        <ion-button (click)="deleteAccount(modal)" class="danger-button" color="danger">{{"YES" | translate}}</ion-button>
         <ion-button (click)="modal.dismiss()" class="danger-button" color="primary">{{"NO" | translate}}</ion-button>
+        <ion-button (click)="deleteAccount(modal)" class="danger-button" color="danger">{{"YES" | translate}}</ion-button>
       </div>
     </ng-template>
   </ion-modal>

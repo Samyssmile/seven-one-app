@@ -40,23 +40,12 @@ export class LeaderboardPage implements OnInit, AfterViewChecked, Observer<Rank[
         }
       });
       this.partOfRankList = this.ranklist.slice(0, this.listSizeLimit);
-      this.presentToast('bottom');
     }
-  }
-
-  async presentToast(position: 'top' | 'middle' | 'bottom') {
-    const toast = await this.toastController.create({
-      message: 'Loadboard refreshed...',
-      duration: 1500,
-      position,
-    });
-
-    await toast.present();
   }
 
   loadData(event) {
     setTimeout(() => {
-      this.listSizeLimit += 5;
+      this.listSizeLimit += 25;
       this.partOfRankList = this.ranklist.slice(0, this.listSizeLimit);
       event.target.complete();
 

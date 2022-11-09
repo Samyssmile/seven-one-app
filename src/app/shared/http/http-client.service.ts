@@ -162,4 +162,8 @@ export class HttpClientService {
       this.jwt.next(resonsedata.jwt);
     });
   }
+
+  clear() {
+
+  }
 }

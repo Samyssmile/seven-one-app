@@ -41,6 +41,7 @@ export class RegistrationPage implements OnInit, Observer<any> {
 
   onSubmit() {
     this.registrationService.createUser(this.registrationForm.controls.nickname.value);
+    this.registrationForm.reset();
   }
 
   complete(): void {
