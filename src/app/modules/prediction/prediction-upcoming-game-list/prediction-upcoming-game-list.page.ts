@@ -38,7 +38,6 @@ export class PredictionUpcomingGameListPage implements OnInit, Observer<Match[]>
     // stop propagation to avoid opening the game details
     event.preventDefault();
     event.stopPropagation();
-    console.log(match);
     this.modalController
       .create({
         component: MakePredictionComponent,

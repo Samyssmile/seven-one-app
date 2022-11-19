@@ -1,11 +1,12 @@
 export const environment = {
   production: true,
-  baserUrl: 'https://wmapp.akogare.de',
-  createUserUrl: '/user/account/create',
+  baserUrl: 'https://wmapp-prod.akogare.de',
+  createUserUrl: '/user/create',
+  deleteAccountUrl: '/user/delete',
   leaderboardUrl: '/ranking/all',
   predictionUrl: '/predictions',
   matchUrl: '/matches',
-  loginUrl: '/user/account/login',
+  loginUrl: '/user/login',
   allMatchesUrl: '/matches/all',
   unpredictedMatchesUrl: '/matches/unpredicted',
 };

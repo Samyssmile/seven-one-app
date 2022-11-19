@@ -18,7 +18,6 @@
       <p>{{ match.matchDate }}</p>
       <p>Group {{ match.groupName }}</p>
     </ion-label>
-
     <ion-avatar>
       <img [src]="match.secondTeam.img"/>
     </ion-avatar>
@@ -37,8 +36,6 @@
                    placeholder="0"
                    type="number">
         </ion-input>
-
-
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -48,11 +45,12 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button (click)="onPredictionMade()" [disabled]="isSaveButtonDisabled()" color="primary" expand="block">Save
+        <ion-button (click)="onPredictionMade()" [disabled]="isSaveButtonDisabled()" color="primary" expand="block">
+          {{"SAVE" | translate}}
         </ion-button>
       </ion-col>
       <ion-col>
-        <ion-button (click)="onDismiss()" color="danger" expand="block">Cancel</ion-button>
+        <ion-button (click)="onDismiss()" color="danger" expand="block">{{"CANCEL" | translate}}</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

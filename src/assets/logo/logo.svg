@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="558" height="513" viewBox="0 0 558 513">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #000;
+        stroke-linejoin: round;
+        stroke-width: 1px;
+        font-size: 200px;
+        fill: #fff;
+        text-anchor: middle;
+        font-family: "Blenheim Signature";
+      }
+    </style>
+  </defs>
+  <text id="Tipdo" class="cls-1" x="265.875" y="277.875"><tspan x="265.875">Tipdo</tspan></text>
+</svg>

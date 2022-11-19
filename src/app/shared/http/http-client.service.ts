@@ -3,7 +3,7 @@ import * as uuid from 'uuid';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { AuthenticatedUserDto } from '../dtos/AuthenticatedUserDto';
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject, Observer} from 'rxjs';
 import { Storage } from '@ionic/storage-angular';
 import { PredictionModel } from '../../modules/prediction/models/prediction.model';
 
@@ -11,18 +11,10 @@ import { PredictionModel } from '../../modules/prediction/models/prediction.mode
   providedIn: 'root',
 })
 export class HttpClientService {
-  private jwt: BehaviorSubject<string>;
-  private profile: AuthenticatedUserDto;
+  private profile: BehaviorSubject<AuthenticatedUserDto> = new BehaviorSubject<AuthenticatedUserDto>(null);
 
   constructor(private httpClient: HttpClient, private storage: Storage) {
-    this.jwt = new BehaviorSubject<string>(null);
-    storage.create().then((localStorage) => {
-      localStorage.get('profile').then((value) => {
-        if (value != null) {
-          this.jwt.next(value.jwt);
-        }
-      });
-    });
+    this.createStorage();
   }
 
   createNewUserAccount(clientUuid: uuid, nickname: string) {
@@ -50,16 +42,10 @@ export class HttpClientService {
             }
           }
         );
-        this.jwt.next(resonsedata.jwt);
+        this.profile.next(resonsedata);
       });
   }
 
-  registerJwtObserver(observer) {
-    if (isDevMode()) {
-      console.log('Registering JWT Observer');
-    }
-    this.jwt.subscribe(observer);
-  }
 
   getLeaderboard() {
     if (isDevMode()) {
@@ -71,10 +57,9 @@ export class HttpClientService {
     if (isDevMode()) {
       console.log('Request Leaderboard URL: ' + requestUrl);
     }
-
     return this.httpClient.get(requestUrl, {
       headers: {
-        authorization: 'Bearer ' + this.jwt.value,
+        authorization: 'Bearer ' + this.profile.value.jwt,
       },
     });
   }
@@ -107,6 +92,17 @@ export class HttpClientService {
     });
   }
 
+  deleteUserAccount(){
+    const requestUrl = environment.baserUrl + environment.deleteAccountUrl + '?clientUuid=' + this.profile.value.clientUuid;
+    return this.httpClient.delete(requestUrl, {
+      headers: {
+        authorization: 'Bearer ' + this.profile.value.jwt,
+      },
+    });
+  }
+
+
+
   getPredictions(clientUuid: string, jwt: string) {
     if (isDevMode()) {
       console.log('Requesting Predictions');
@@ -120,18 +116,16 @@ export class HttpClientService {
   }
 
   getUnpredictedGames(clientUuid: string) {
-    console.log('Requesting Games');
     const requestUrl = environment.baserUrl + environment.unpredictedMatchesUrl + '?clientUuid=' + clientUuid;
 
     return this.httpClient.get(requestUrl, {
       headers: {
-        authorization: 'Bearer ' + this.jwt.value,
+        authorization: 'Bearer ' + this.profile.value.jwt,
       },
     });
   }
 
   getAllGames(jwt: string) {
-    console.log('Requesting Games');
     const requestUrl = environment.baserUrl + environment.allMatchesUrl;
 
     return this.httpClient.get(requestUrl, {
@@ -159,11 +153,28 @@ export class HttpClientService {
           }
         }
       );
-      this.jwt.next(resonsedata.jwt);
+      this.profile.next(resonsedata);
     });
   }
 
-  clear() {
-
+  registerOnProfile(observer: Observer<any>) {
+    this.profile.subscribe(observer);
   }
+
+  clear(): void {
+    this.profile.next(null);
+  }
+
+  private createStorage() {
+    this.storage.create().then(
+      (value) => {
+        console.log('Storage created');
+      },
+      (error) => {
+        console.log('Error while creating storage: ' + error);
+      },
+    );
+  }
+
+
 }

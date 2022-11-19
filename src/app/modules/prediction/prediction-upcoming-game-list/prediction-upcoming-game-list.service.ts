@@ -89,4 +89,8 @@ export class PredictionUpcomingGameListService {
     });
 
   }
+
+  clear() {
+    this.games.next([]);
+  }
 }

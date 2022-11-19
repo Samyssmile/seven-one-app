@@ -1,20 +1,22 @@
-<ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <h1>{{"WELCOME" | translate}}</h1>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <form (ngSubmit)="onSubmit()" [formGroup]="registrationForm">
-          <ion-item>
-            <ion-label position="floating">Your Nickname</ion-label>
-            <ion-input formControlName="nickname" minlength="3" required="true" type="text"></ion-input>
-          </ion-item>
-          <ion-button [disabled]="!registrationForm.valid" expand="block" type="submit">Join</ion-button>
-        </form>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
+  <ion-content>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{"SIGNUP" | translate}}</ion-card-title>
+        <ion-card-subtitle>World Cup 2022</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-row class="signup-form">
+          <ion-col>
+            <form (ngSubmit)="onSubmit()" [formGroup]="registrationForm">
+              <ion-item>
+                <ion-label position="floating">{{"YOUR_NICKNAME" | translate}}</ion-label>
+                <ion-input formControlName="nickname" pattern="[a-zA-Z]*" minlength="3" required="true" type="text"></ion-input>
+              </ion-item>
+              <ion-button [disabled]="!registrationForm.valid" expand="block" type="submit">{{"JOIN" | translate}}</ion-button>
+            </form>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>

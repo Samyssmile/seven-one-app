@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { TranslateConfigService } from '../../shared/translate/translate-config.service';
-import { TranslateService } from '@ngx-translate/core';
+import {Component, OnInit} from '@angular/core';
+import {TranslateConfigService} from '../../shared/translate/translate-config.service';
+import {TranslateService} from '@ngx-translate/core';
 import {Storage} from '@ionic/storage-angular';
 import {Router} from '@angular/router';
 import {HttpClientService} from '../../shared/http/http-client.service';
+import {
+  PredictionUpcomingGameListService
+} from '../prediction/prediction-upcoming-game-list/prediction-upcoming-game-list.service';
 
 @Component({
   selector: 'app-information',
@@ -13,7 +16,8 @@ import {HttpClientService} from '../../shared/http/http-client.service';
 export class InformationPage implements OnInit {
   language: string;
 
-  constructor(private router: Router,
+  constructor(private predictionListService: PredictionUpcomingGameListService,
+    private router: Router,
     private httpClientService: HttpClientService,
     private storage: Storage,
     private translateConfigService: TranslateConfigService,
@@ -25,10 +29,18 @@ export class InformationPage implements OnInit {
   ngOnInit() {}
 
   deleteAccount(modal) {
-    this.httpClientService.clear();
-    this.storage.clear();
-    modal.dismiss();
-    this.router.navigateByUrl('/registration');
+    this.storage.clear().then(
+      () => {
+        this.httpClientService.deleteUserAccount().subscribe(
+          (value) => {
+            this.storage.clear();
+            this.httpClientService.clear();
+            this.predictionListService.clear();
+            modal.dismiss();
+            this.router.navigateByUrl('/registration').then();
+          }
+        );
+      }
+    );
   }
-
 }

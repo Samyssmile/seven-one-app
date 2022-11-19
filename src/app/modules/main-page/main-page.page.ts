@@ -28,14 +28,13 @@ export class MainPagePage implements OnInit, Observer<any> {
   ) {
     this.translateConfigService.getDefaultLanguage();
     this.language = this.translateConfigService.getCurrentLang();
-    console.log('MainPagePage - constructor');
   }
 
   ngOnInit() {
-    console.log('MainPagePage - ngOnInit');
     this.storage.get('profile').then((profile) => {
-      console.log('Profile loaded from storage: ' + profile.nickname);
       this.nickname = profile.nickname;
+      this.score = profile.score;
+      this.rank = profile.rank;
     });
   }
 
@@ -48,22 +47,11 @@ export class MainPagePage implements OnInit, Observer<any> {
   }
 
   next(authenticatedUserDto: AuthenticatedUserDto): void {
-    console.log('Received new profile in Main: ' + authenticatedUserDto.nickname);
     if (authenticatedUserDto) {
-      console.log(
-        'Received new profile: ' + authenticatedUserDto.nickname + ' and UUID: ' + authenticatedUserDto.clientUuid
-      );
       this.nickname = authenticatedUserDto.nickname;
       this.score = authenticatedUserDto.score;
       this.rank = authenticatedUserDto.rank;
-      this.storage.set('profile', authenticatedUserDto).then(
-        (value) => {
-          console.log('Profile saved to storage - ' + value.nickname);
-        },
-        (error) => {
-          console.log('Error while saving profile to storage: ' + error);
-        }
-      );
+
     }else{
       this.nickname = 'No nickname yet';
       this.score = 0;

@@ -7,6 +7,7 @@ import { HttpClientService } from '../../../shared/http/http-client.service';
 import { Router } from '@angular/router';
 import { TranslateConfigService } from '../../../shared/translate/translate-config.service';
 import { TranslateService } from '@ngx-translate/core';
+import {AuthenticatedUserDto} from '../../../shared/dtos/AuthenticatedUserDto';
 
 @Component({
   selector: 'app-registration',
@@ -36,7 +37,7 @@ export class RegistrationPage implements OnInit, Observer<any> {
       }),
     });
 
-    this.httpClientService.registerJwtObserver(this);
+    this.httpClientService.registerOnProfile(this);
   }
 
   onSubmit() {
@@ -52,9 +53,8 @@ export class RegistrationPage implements OnInit, Observer<any> {
     console.log('JWT Observer error: ' + err);
   }
 
-  next(value: any): void {
-    console.log('Received new JWT: ' + value);
-    if (value && value.length > 0) {
+  next(value: AuthenticatedUserDto): void {
+    if (value && value.jwt && value.nickname && value.jwt.length > 0) {
       this.router.navigateByUrl('/main-page/prediction-upcoming-game-list').then();
     }
   }

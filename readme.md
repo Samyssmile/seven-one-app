@@ -22,3 +22,6 @@ Diese App ist Ihr perfekter Begleiter für die Fußball-Weltmeisterschaft 2022! 
     docker run -p 8888:80 registry.akogare.de/seven-one
     Running on localost:8888
 
+## Generate Android Assets
+
+    npx capacitor-assets generate --iconBackgroundColor '#eeeeee' --iconBackgroundColorDark '#222222' --splashBackgroundColor '#eeeeee' --splashBackgroundColorDark '#111111' --android

@@ -1,7 +1,23 @@
 {
-  "name": "wm-ionic-ui",
+  "name": "SevenOne",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "rootDir": "src",
+      "webDir": "dist",
+      "appId": "de.nexent.sevenone",
+      "appName": "SevenOne",
+      "bundledWebRuntime": false,
+      "npmClient": "npm",
+      "webDirAbs": "/Users/alexander/Projects/SevenOne/src/dist",
+      "plugins": {
+        "SplashScreen": {
+          "launchShowDuration": 3
+        },
+        "StatusBar": {
+          "backgroundColor": "#000000"
+        }
+      }
+    }
   },
   "type": "angular"
 }

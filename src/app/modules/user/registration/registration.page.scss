@@ -1,12 +1,51 @@
 // Vertically Center Ionic Grid
 // ------------------------------------
-ion-col {
-  text-align: center;
+
+ion-content
+{
+  /* Ionic 6 Background image with 0.5 opacity*/
+  --background:  url('splash4.png') no-repeat center center / cover;
+
+  /* center elements*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
 }
 
-ion-grid {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 80%;
+ion-card{
+  /*center vertical and horizontal*/
+  margin-top: 75%;
+  opacity: 0.86;
+
 }
+ion-col {
+  text-align: center;
+  color: #ffeec2;
+}
+
+.title
+{
+  color: #363636;
+  /* outline */
+  text-shadow: 0 0 1px #40a240;
+
+}
+
+.signup-form
+{
+  margin-top: 20px;
+  opacity: 0.96;
+}
+
+
+/* svg logo as circle with black background*/
+
+.logo
+{
+  border-radius: 50%;
+  padding: 10px;
+  margin: 10px;
+}
+
